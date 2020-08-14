@@ -3,4 +3,5 @@ from django.http import HttpResponse
 # Create your views here.
 
 def home(request):
-    return HttpResponse('Welcome to the development of She Said Pizza')
+    return render(request, 'sspizza/dashboard.html')
+    # return HttpResponse('Welcome to the development of She Said Pizza')
