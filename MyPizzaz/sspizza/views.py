@@ -5,8 +5,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 # Create your views here.
 from .models import *
-from .forms import *
-
+from .forms import * 
 def home(request):
     pizzas = Pizza.objects.all()
     context = {'pizzas': pizzas}
@@ -35,3 +34,11 @@ def LoginPage(request):
         else:
             messages.info(request, 'Password or Username must be incorrect')
     return render(request, 'sspizza/login.html')
+
+def create_Order(request):
+    form = OrderForm()
+
+    if request.method == 'POST':
+        print('Printing POST:', request.POST)
+    context = {'form':form}
+    return render(request, 'sspizza/create_order.html', context)
