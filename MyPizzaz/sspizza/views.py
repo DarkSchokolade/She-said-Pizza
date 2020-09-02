@@ -37,8 +37,20 @@ def LoginPage(request):
 
 def create_Order(request):
     form = OrderForm()
+    context = {'form':form}
+    return render(request, 'sspizza/create_order.html', context)
+
+def PlaceOrder(request, pk):
 
     if request.method == 'POST':
         print('Printing POST:', request.POST)
-    context = {'form':form}
-    return render(request, 'sspizza/create_order.html', context)
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            pizza = form.save(commit=False)
+            pizza.created_by = request.user
+            pizza.save()
+        else:
+            print(form._errors)
+
+    context = {'pizza': pizza}
+    return render(request, 'sspizza/place_order.html', context)

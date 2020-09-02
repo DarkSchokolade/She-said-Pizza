@@ -16,3 +16,4 @@ class OrderForm(ModelForm):
     class Meta:
         model = Pizza
         fields = '__all__'
+        exclude = ['created_by']

@@ -26,9 +26,11 @@ class Topping(models.Model):
 class Pizza(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
-    crust =  models.ForeignKey(Crust,null=True, on_delete=models.SET_NULL)
+    crust =  models.ForeignKey(Crust, null=True, on_delete=models.SET_NULL)
     topping = models.ManyToManyField(Topping)
 
+    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    
     def __str__(self):
         return self.name
 
