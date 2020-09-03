@@ -3,6 +3,8 @@
 {% block content %}
 <h1>Dashboard of SSP</h1>
 <!-- make a table or any thing and list all pizzas from the database -->
+<button><a href="{% url 'sspizza:create_order' %}">Make your own Pizza</a></button>
+<hr>
 <table border="1">
     <thead>
         <tr>
@@ -15,7 +17,7 @@
             <td>
                 <h2>{{ pizza.name }}</h2><br>
                 <small style="color: #666;">{{ pizza.description }}</small>
-                <h4>{{ pizza.price }}</h4>
+                <h4>Rs. {{ pizza.price }}</h4>
                 <button><a href="#">ORDER!</a></button>
             </td>
         </tr>

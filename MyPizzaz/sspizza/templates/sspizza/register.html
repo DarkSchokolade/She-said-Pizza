@@ -1,0 +1,9 @@
+<h1>Register Yourself</h1>
+<hr>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Register">
+</form>
+
+<p>If you already have an account <strong><a href="{% url 'sspizza:login' %}">Login</a></strong></p>

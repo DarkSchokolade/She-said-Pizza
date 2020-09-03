@@ -1,65 +1,53 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
-class Customer(models.Model):
-    name = models.CharField(max_length=200)
-    email = models.EmailField(max_length=200)
-    phone = models.CharField(max_length=100)
-    address = models.TextField()
-    date_created = models.DateTimeField(auto_now_add=True)
+# instead of having a separate customerInfo just put the info in order [simple is better]
+class Crust(models.Model):
+    name = models.CharField(max_length=200, null=True)
+    price = models.FloatField(null=True)
 
     def __str__(self):
         return self.name
 
-class VegTopping(models.Model):
-    name = models.CharField(max_length=100)
-    def __str__(self):
-        return self.name
+class Topping(models.Model):
+    # CAT_F is veg or nonveg
+    CAT_F = (
+        ('VEG', 'VEG'),
+        ('NON-VEG', 'NON-VEG')
+    )
+    name = models.CharField(max_length=200, null=True)
+    category = models.CharField(max_length=10, choices=CAT_F)
+    price = models.FloatField(null=True)
 
-class NonVegTopping(models.Model):
-    name = models.CharField(max_length=100)
     def __str__(self):
         return self.name
 
 class Pizza(models.Model):
     name = models.CharField(max_length=200)
-    description = models.TextField()
-    price = models.FloatField(null=True)
+    description = models.TextField(blank=True)
+    crust =  models.ForeignKey(Crust, null=True, on_delete=models.SET_NULL)
+    topping = models.ManyToManyField(Topping)
+
+    # created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    # created_at = models.DateTimeField(auto_now_add=True)
     
+    # class Meta:
+    #     get_latest_by = 'created_at'
+
     def __str__(self):
         return self.name
 
 
-class Base(models.Model):
-    SIZE = (
-        ('Small', 'Small'),
-        ('Medium', 'Medium'),
-        ('Large', 'Large'),
-        ('Xlarge', 'Xlarge')
-    )
-    crustName = models.CharField(max_length=100)
-    size = models.CharField(max_length=10, default='Medium', choices=SIZE)
-    price = models.FloatField(null=True)
-
-    def __str__(self):
-        return self.crustName
-
-class Order(models.Model):
-    STATUS = (
-        ('Pending', 'Pending'),
-        ('Out for Delivery', 'Out for Delivery'),
-        ('Delivered', 'Delivered')
-    )
-    customer = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL)
+class OrderCart(models.Model):
+    # customer = models.ForeignKey(CustomerInfo, null=True, on_delete=models.SET_NULL)
+    # user =  models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    # phone = models.CharField(max_length=100)
+    # address = models.TextField()
 
     pizza = models.ForeignKey(Pizza, null=True, on_delete=models.SET_NULL)
-    vegToppings = models.ManyToManyField(VegTopping)
-    nonVegToppings = models.ManyToManyField(NonVegTopping)
-    baseCrust = models.ForeignKey(Base, null=True, on_delete=models.SET_NULL)
-
     date_created = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=200, null=True, choices=STATUS)
-
+    total_price = models.FloatField(null=True)
+    
     def __str__(self):
         return self.pizza.name

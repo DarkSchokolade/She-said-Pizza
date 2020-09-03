@@ -1,0 +1,10 @@
+{% extends 'sspizza/main.html' %}
+{% load static %}
+
+{% block content %}
+<form action="{% url 'sspizza:place_order' request.user %}" method="POST">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" name="Submit">
+</form>
+{% endblock %}
