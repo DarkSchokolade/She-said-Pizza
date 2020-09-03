@@ -29,8 +29,12 @@ class Pizza(models.Model):
     crust =  models.ForeignKey(Crust, null=True, on_delete=models.SET_NULL)
     topping = models.ManyToManyField(Topping)
 
-    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    # created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    # created_at = models.DateTimeField(auto_now_add=True)
     
+    # class Meta:
+    #     get_latest_by = 'created_at'
+
     def __str__(self):
         return self.name
 

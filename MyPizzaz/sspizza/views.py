@@ -49,8 +49,27 @@ def PlaceOrder(request, pk):
             pizza = form.save(commit=False)
             pizza.created_by = request.user
             pizza.save()
+            # so this gets the topping "id" from the POST request 
+            topping_info = request.POST.getlist('topping')
+            print(topping_info)
+            # then loop over the toppings list and then add them to pizza,
+            # because pizza should save first and then add the manytomany relation (ref: Docs->ManyToMany)
+            total_topping_price = 0
+            for topping_num in topping_info:
+                pizza.topping.add(topping_num)
+                topping_price = Topping.objects.get(id=topping_num).price
+                total_topping_price += topping_price
+                print(topping_price)
+
+            print('Total topping price: ', total_topping_price)   # logic of calculation works
+            total_amount = total_topping_price + pizza.crust.price
         else:
             print(form._errors)
+        # serious shit here no matter what u do u cant read manytomany relation
+        # userid = request.user.id
+        # print(userid)
+        # get_latest_pizza = Pizza.objects.filter(created_by=userid).latest()
+        # print(get_latest_pizza.topping)
 
-    context = {'pizza': pizza}
+    context = {'pizza': pizza, 'total_topping_price': total_topping_price, 'total_amount': total_amount}
     return render(request, 'sspizza/place_order.html', context)
