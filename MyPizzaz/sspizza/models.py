@@ -42,8 +42,9 @@ class Pizza(models.Model):
 class OrderCart(models.Model):
     # customer = models.ForeignKey(CustomerInfo, null=True, on_delete=models.SET_NULL)
     # user =  models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    # phone = models.CharField(max_length=100)
-    # address = models.TextField()
+    contact_name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=100)
+    address = models.TextField()
 
     pizza = models.ForeignKey(Pizza, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True)

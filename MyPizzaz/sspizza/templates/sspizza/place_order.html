@@ -2,3 +2,9 @@
 <h2>Crust Price: {{ pizza.crust.price }}</h2>
 <h3>Total Topping Price: {{ total_topping_price }}</h3>
 <h3>Total: {{ total_amount }}</h3>
+
+<form action="{% url 'sspizza:bill' pizza.id %}" method="post">
+    {% csrf_token %}
+    {{ delivery_form }}
+    <button type="submit">Order Delivery</button>
+</form>

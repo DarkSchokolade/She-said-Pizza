@@ -1,0 +1,12 @@
+<h1>Your Bill</h1>
+<h2>{{ order.pizza }}</h2>
+
+<small>description: {{ order.pizza.description }}</small><br>
+<small>date: {{ order.date_created }}</small>
+
+<h2>To: {{ order.contact_name }}</h2>
+<h2>Ph: {{ order.phone }}</h2>
+<h2>Deliver To: {{ order.address }}</h2>
+<h2>Total Amount: {{ order.total_price }}</h2>
+
+<h3>say cheese</h3>
