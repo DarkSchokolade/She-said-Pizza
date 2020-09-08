@@ -10,7 +10,6 @@ def home(request):
     pizzas = Pizza.objects.all()
     context = {'pizzas': pizzas}
     return render(request, 'sspizza/dashboard.html', context)
-    # return HttpResponse('Welcome to the development of She Said Pizza')
 
 def RegisterPage(request):
     form = CreateUserForm()
@@ -45,6 +44,8 @@ def PlaceOrder(request, pk):
     if request.method == 'POST':
         print('Printing POST:', request.POST)
         form = OrderForm(request.POST)
+        delivery_form = DeliveryInfo()
+        
         if form.is_valid():
             pizza = form.save(commit=False)
             pizza.created_by = request.user
@@ -63,13 +64,29 @@ def PlaceOrder(request, pk):
 
             print('Total topping price: ', total_topping_price)   # logic of calculation works
             total_amount = total_topping_price + pizza.crust.price
+
+            bill = OrderCart(pizza=pizza, total_price=total_amount)
+            bill.save()
         else:
             print(form._errors)
-        # serious shit here no matter what u do u cant read manytomany relation
-        # userid = request.user.id
-        # print(userid)
-        # get_latest_pizza = Pizza.objects.filter(created_by=userid).latest()
-        # print(get_latest_pizza.topping)
 
-    context = {'pizza': pizza, 'total_topping_price': total_topping_price, 'total_amount': total_amount}
+    context = {
+        'pizza': pizza, 'total_topping_price': total_topping_price,
+        'total_amount': total_amount, 'delivery_form': delivery_form
+        }
     return render(request, 'sspizza/place_order.html', context)
+
+def GenerateBill(request, pk):
+    if request.method == 'POST':
+        order = OrderCart.objects.get(pizza=pk)
+
+        contact_name = request.POST.get('contact_name')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+      
+        order.contact_name = contact_name
+        order.phone = phone
+        order.address = address
+        order.save()
+    context = {'order': order}
+    return render(request, 'sspizza/bill.html',context)
