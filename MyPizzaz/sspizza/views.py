@@ -6,9 +6,11 @@ from django.contrib import messages
 # Create your views here.
 from .models import *
 from .forms import * 
+
+
 def home(request):
-    pizzas = Pizza.objects.all()
-    context = {'pizzas': pizzas}
+    menu = Menu.objects.all()
+    context = {'menu': menu}
     return render(request, 'sspizza/dashboard.html', context)
 
 def RegisterPage(request):
@@ -88,5 +90,27 @@ def GenerateBill(request, pk):
         order.phone = phone
         order.address = address
         order.save()
+    context = {'order': order}
+    return render(request, 'sspizza/bill.html',context)
+
+# for menu items
+def OrderMenu(request, p_key):
+    delivery_form = DeliveryInfo()
+    menu_item = Menu.objects.get(id=p_key)
+    print(menu_item)
+    if request.method == 'POST':
+        delivery_form = DeliveryInfo(request.POST)
+        if delivery_form.is_valid():
+            menu_order = delivery_form.save(commit=False)
+            menu_order.menu = menu_item
+            menu_order.total_price = menu_item.price
+            menu_order.save()
+            print(menu_order.id)
+            return redirect('sspizza:menu_bill', p_key=menu_order.id)
+    context = {'menu_item': menu_item,'delivery_form': delivery_form}
+    return render(request, 'sspizza/menu_order.html', context)
+
+def MenuBill(request, p_key):
+    order = OrderCart.objects.get(id=p_key)
     context = {'order': order}
     return render(request, 'sspizza/bill.html',context)

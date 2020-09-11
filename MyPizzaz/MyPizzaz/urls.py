@@ -16,7 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('sspizza/', include('sspizza.urls')),
     path('admin/', admin.site.urls),
 ]
+
+# this creates url for images stored => goto http://127.0.0.1:8000/images/panipuri.jpg
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
