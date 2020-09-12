@@ -8,6 +8,9 @@
 <body>
     <!-- Need to add a nav bar -->
     <h1>Welcome {{ request.user }}</h1>
+    <a href="{% url 'sspizza:logout' %}">Logout</a>
+    <a href="{% url 'sspizza:login' %}">Login</a>
+    <a href="{% url 'sspizza:register' %}">Register</a>
     {% block content %}
         
     {% endblock %}

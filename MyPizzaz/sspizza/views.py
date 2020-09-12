@@ -36,6 +36,10 @@ def LoginPage(request):
             messages.info(request, 'Password or Username must be incorrect')
     return render(request, 'sspizza/login.html')
 
+def LogoutUser(request):
+    logout(request)
+    return redirect('sspizza:home')
+
 def create_Order(request):
     form = OrderForm()
     context = {'form':form}
