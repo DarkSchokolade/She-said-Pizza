@@ -15,7 +15,7 @@
         {% for item in menu %}
         <tr>
             <td>
-                <img src="{{ item.food_pic.url }}" alt="menu item">
+                <img src="{{ item.food_pic.url }}" alt="menu item" style="max-width: 350px; max-height: 350px;">
                 <h2>{{ item.name }}</h2><br>
                 <small style="color: #666;">{{ item.description }}</small>
                 <h4>Rs. {{ item.price }}</h4>
