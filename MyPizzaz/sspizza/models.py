@@ -38,6 +38,14 @@ class Pizza(models.Model):
     def __str__(self):
         return self.name
 
+class Menu(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+    food_pic = models.ImageField(null=True, blank=True)
+    price = models.FloatField(null=True)
+
+    def __str__(self):
+        return self.name
 
 class OrderCart(models.Model):
     # customer = models.ForeignKey(CustomerInfo, null=True, on_delete=models.SET_NULL)
@@ -47,8 +55,12 @@ class OrderCart(models.Model):
     address = models.TextField()
 
     pizza = models.ForeignKey(Pizza, null=True, on_delete=models.SET_NULL)
+    menu = models.ForeignKey(Menu, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True)
     total_price = models.FloatField(null=True)
     
     def __str__(self):
-        return self.pizza.name
+        if self.pizza:
+            return self.pizza.name
+        else:
+            return self.menu.name

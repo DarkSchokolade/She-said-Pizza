@@ -9,4 +9,7 @@ urlpatterns = [
     path('create_order/', views.create_Order, name='create_order'),
     path('place_order/<str:pk>/', views.PlaceOrder, name='place_order'),
     path('bill/<str:pk>/', views.GenerateBill, name='bill'),
+
+    path('order_menu/<str:p_key>/', views.OrderMenu, name='order_menu'),
+    path('menu_bill/<str:p_key>/', views.MenuBill, name='menu_bill'),
 ]
