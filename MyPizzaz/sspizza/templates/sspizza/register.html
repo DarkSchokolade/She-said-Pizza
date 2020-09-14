@@ -1,3 +1,7 @@
+{% extends 'sspizza/main.html' %}
+
+{% block content %}
+
 <h1>Register Yourself</h1>
 <hr>
 <form action="" method="post">
@@ -7,3 +11,5 @@
 </form>
 
 <p>If you already have an account <strong><a href="{% url 'sspizza:login' %}">Login</a></strong></p>
+
+{% endblock %}
