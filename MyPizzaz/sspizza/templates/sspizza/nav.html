@@ -1,0 +1,33 @@
+<nav>
+    <div class="logo">
+        <h4>She Said Pizza</h4>
+    </div>
+    <ul class="nav-links">
+        <li>
+            <a href="{% url 'sspizza:home' %}">Home</a>
+        </li>
+        {% if user.is_authenticated %}
+            <li>
+                <a href="">Hi, {{request.user}}</a>
+            </li>
+            <li>
+                <a href="{% url 'sspizza:logout' %}">Logout</a>
+            </li>
+        {% else %}
+            <li>
+                <a href="{% url 'sspizza:login' %}">Login</a>
+            </li>
+            <li>
+                <a href="{% url 'sspizza:register' %}">Register</a>
+            </li>
+        {% endif %}
+        <li>
+            <a href="">About</a>
+        </li>
+    </ul>
+    <div class="burger">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+    </div>
+</nav>

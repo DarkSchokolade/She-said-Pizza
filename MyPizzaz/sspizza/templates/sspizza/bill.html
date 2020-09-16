@@ -1,3 +1,7 @@
+{% extends 'sspizza/main.html' %}
+
+{% block content %}
+
 <h1>Your Bill</h1>
 <h2>{{ order }}</h2>
 
@@ -9,3 +13,5 @@
 <h2>Total Amount: {{ order.total_price }}</h2>
 
 <h3>say cheese</h3>
+
+{% endblock %}

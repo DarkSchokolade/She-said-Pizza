@@ -1,19 +1,22 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'sspizza/css/nav.css' %}">
     <title>She Said Pizza</title>
 </head>
 <body>
-    <!-- Need to add a nav bar -->
-    <h1>Welcome {{ request.user }}</h1>
-    <a href="{% url 'sspizza:logout' %}">Logout</a>
-    <a href="{% url 'sspizza:login' %}">Login</a>
-    <a href="{% url 'sspizza:register' %}">Register</a>
+    
+    {% include 'sspizza/nav.html' %}
+    
     {% block content %}
         
     {% endblock %}
     
+    <script src="{% static 'sspizza/js/nav.js' %}"></script>
 </body>
 </html>
