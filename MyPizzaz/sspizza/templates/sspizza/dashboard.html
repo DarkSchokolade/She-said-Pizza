@@ -1,28 +1,22 @@
 {% extends 'sspizza/main.html' %}
 
 {% block content %}
-<h1>Dashboard of SSP</h1>
-<!-- make a table or any thing and list all pizzas from the database -->
-<button><a href="{% url 'sspizza:create_order' %}">Make your own Pizza</a></button>
+<h1 style="text-align:center">MENU</h1>
+
+<button class="btn-expand"><a href="{% url 'sspizza:create_order' %}">Make your own Pizza</a></button>
 <hr>
-<table border="1">
-    <thead>
-        <tr>
-            <th>MENU</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in menu %}
-        <tr>
-            <td>
-                <img src="{{ item.food_pic.url }}" alt="menu item" style="max-width: 350px; max-height: 350px;">
-                <h2>{{ item.name }}</h2><br>
-                <small style="color: #666;">{{ item.description }}</small>
-                <h4>Rs. {{ item.price }}</h4>
-                <button><a href="{% url 'sspizza:order_menu' item.id %}">ORDER!</a></button>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<section class="basic-grid">
+    {% for item in menu %}
+    <div class="card">
+        <img src="{{ item.food_pic.url }}" alt="menu item" style="width: 100%;">
+        <div class="container">
+            <h2>{{ item.name }}</h2><br>
+            <small style="color: #472600;">{{ item.description }}</small>
+            <h4>Rs. {{ item.price }}</h4>
+            <button class="btn-normal"><a href="{% url 'sspizza:order_menu' item.id %}">ORDER!</a></button>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
 {% endblock %}
