@@ -1,0 +1,21 @@
+.card {
+    width: 250px;
+    background: rgb(235,132,15);
+    color: aliceblue;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 6%;
+}
+
+.container {
+    padding: 2px 16px;
+}
+
+.basic-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
