@@ -6,9 +6,9 @@
 <hr>
 <form action="" method="post">
     {% csrf_token %}
-    <input type="text" name="username" placeholder="Username..">
-    <input type="password" name="password" id="password" placeholder="Password">
-    <input type="submit" value="Login">
+    <input type="text" name="username" placeholder="Username.." id="uname">
+    <input type="password" name="password" id="password" placeholder="Password" id="passd">
+    <input type="submit" value="Login" id="submit">
 </form>
 {% for msg in messages %}
     <p>{{ msg }}</p>

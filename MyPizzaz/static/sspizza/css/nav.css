@@ -4,6 +4,32 @@
     box-sizing: border-box;
 }
 
+form {
+    margin-left: 40%;
+    padding: 20px 10px;
+    
+
+}
+
+#uname {
+    display: flex;
+
+}
+
+input {
+    padding: 7px;
+    border-radius: 5px;
+    border-style: none;
+    margin: 2px;
+    display: inline-block;
+}   
+
+#submit {
+    margin-top: 5px;
+    display: flex;
+    text-align: left;
+}
+
 nav{
     display: flex;
     justify-content: space-around;
