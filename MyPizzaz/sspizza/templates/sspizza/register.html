@@ -4,12 +4,14 @@
 
 <h1>Register Yourself</h1>
 <hr>
-<form action="" method="post">
+<div style="margin: 0; display: flex; align-items: center; justify-content: center;">
+<form action="" method="post" style="margin: 0;">
+    
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Register">
 </form>
-
+</div>
 <p>If you already have an account <strong><a href="{% url 'sspizza:login' %}">Login</a></strong></p>
 
 {% endblock %}
