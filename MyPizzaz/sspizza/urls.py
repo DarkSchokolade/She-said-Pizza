@@ -8,7 +8,7 @@ urlpatterns = [
     path('logout/', views.LogoutUser, name='logout'),
     
     path('', views.home, name='home'),
-    path('create_order/', views.create_Order, name='create_order'),
+    path('create_order/', views.CreateOrder, name='create_order'),
     path('place_order/<str:pk>/', views.PlaceOrder, name='place_order'),
     path('bill/<str:pk>/', views.GenerateBill, name='bill'),
 

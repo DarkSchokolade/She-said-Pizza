@@ -40,12 +40,15 @@ def LogoutUser(request):
     logout(request)
     return redirect('sspizza:home')
 
-def create_Order(request):
+def CreateOrder(request):
     form = OrderForm()
     context = {'form':form}
     return render(request, 'sspizza/create_order.html', context)
 
 def PlaceOrder(request, pk):
+
+    form = OrderForm()
+    context = {'form':form}
 
     if request.method == 'POST':
         print('Printing POST:', request.POST)
@@ -75,6 +78,8 @@ def PlaceOrder(request, pk):
             bill.save()
         else:
             print(form._errors)
+            print("shit ")
+            return render(request, 'sspizza/create_order.html', context)
 
     context = {
         'pizza': pizza, 'total_topping_price': total_topping_price,
