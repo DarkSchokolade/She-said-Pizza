@@ -4,7 +4,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
-from .models import Pizza, OrderCart
+from .models import Pizza, OrderCart, Topping
 
 class CreateUserForm(UserCreationForm):
     class Meta:
@@ -13,6 +13,7 @@ class CreateUserForm(UserCreationForm):
 
 
 class OrderForm(ModelForm):
+    topping = forms.ModelMultipleChoiceField(queryset=Topping.objects.all(), widget=forms.CheckboxSelectMultiple)
     class Meta:
         model = Pizza
         fields = '__all__'
